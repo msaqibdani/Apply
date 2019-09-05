@@ -1,0 +1,19 @@
+{
+  "name": "apply",
+  "version": "1.0.0",
+  "description": "Job Application Assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/msaqibdani/Apply.git",
+  "keywords": [
+    "Apply",
+    "Electron",
+    "Job"
+  ],
+  "author": "Daniyal Saqib",
+  "devDependencies": {
+    "electron": "^6.0.7"
+  }
+}
