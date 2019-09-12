@@ -1,0 +1,27 @@
+body
+{
+    font-family: Helvetica Neue, Arial, sans-serif;
+    padding: 1vh;
+    background-color: lightgrey;
+
+
+}
+
+.row1
+{
+	height: 7.5vh;
+}
+.row2
+{
+	height: 12.5vh;
+}
+.row3
+{
+	height: 80vh;
+}
+
+
+.col-header
+{
+	text-align: center;
+}
