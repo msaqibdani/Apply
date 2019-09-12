@@ -1,6 +1,6 @@
 body
 {
-    font-family: Helvetica Neue, Arial, sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif, Arial;
     padding: 1vh;
     background-color: lightgrey;
 
@@ -9,19 +9,34 @@ body
 
 .row1
 {
-	height: 7.5vh;
+	height: 5vh;
+	background-color: white;
 }
 .row2
 {
-	height: 12.5vh;
+	height: 5vh;
+	background-color: white;
 }
 .row3
 {
-	height: 80vh;
+	height: 88vh;
 }
 
 
 .col-header
 {
+	color: white;
+	position: relative;
+	margin-top: 2vh;
 	text-align: center;
+	font-weight: bold;
+	background-color: black;
+}
+
+
+.col-buttons
+{
+	position: relative;
+	margin-left: 10.5vw;
+	margin-top: 1vh;
 }
