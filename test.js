@@ -1,3 +1,5 @@
+var colCardPos = "colCards";
+
 function createColCards()
 {
 	var text = document.createElement("p");
@@ -19,7 +21,14 @@ function createColCards()
 	cardHeader.appendChild(cardBody);
 	card.appendChild(cardHeader);
 
-	document.getElementById("colCards").appendChild(card);
+
+	document.getElementById(colCardPos).appendChild(card);
 
 	document.getElementById("CompanyName").value = "";
+}
+
+
+function setColCardPos(s)
+{
+	colCardPos = s;
 }

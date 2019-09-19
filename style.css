@@ -19,6 +19,11 @@ input::placeholder {
 	margin-top: 2vh;
 }
 
+.dropdown
+{
+	margin-left: 11vw;
+}
+
 .colCard
 {
 	margin-top: 1vh;
