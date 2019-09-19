@@ -7,6 +7,28 @@ body
 
 }
 
+input::placeholder {
+  color: grey;
+  opacity: 1;
+  font-size: 12px;
+}
+
+
+#colCards
+{
+	margin-top: 2vh;
+}
+
+.colCard
+{
+	margin-top: 1vh;
+}
+
+.card-text
+{
+	color:white;
+}
+
 .row1
 {
 	height: 5vh;
@@ -14,6 +36,7 @@ body
 }
 .row2
 {
+	margin-left: 32vw;
 	height: 5vh;
 	background-color: white;
 }
