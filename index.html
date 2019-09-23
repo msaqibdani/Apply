@@ -19,28 +19,28 @@
 
  <body>
  <div class = "row row1">
- 	<div class = "container-fluid"></div>
- </div>
+  <button id="AddPortfolio" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Add Company Portfolio</button>
+  </div>
 
  <div class = "row row2">
-  <div class = "text-center col-2" style="border-style: solid;">Dashboard</div>
-  <div class = "text-center col-2" style="border-style: solid;">Statistics</div>
-  <div class = "text-center col-2" style="border-style: solid;">ToDo</div>
+  <button class = "btn btn-outline-dark text-center col">Dashboard</button>
+  <button class = "btn btn-outline-dark text-center col">Statistics</button>
+  <button class = "btn btn-outline-dark text-center col">ToDo</button>
  </div>
 
  <div class = "row row3">
  	
   <div class = "container-fluid col border border-top-0 border-light">
  		<div class = "p-3 rounded col-header">Pursuing</div>
- 		<button type="button" class="col-buttons btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#myModal">+</button>
+ 		
     
-    <div id="colCards">
+    <div id="Pursuing">
      <div class = "colCard">
-        <div class="card bg-primary">
+        <button class="card colbtn bg-primary">
           <div class="card-body text-center">
             <p class="card-text">Facebook</p>
           </div>
-        </div>
+        </button>
       </div>
 
     </div>
@@ -49,20 +49,17 @@
 
  	<div class = "container-fluid col border border-top-0 border-light">
  		<div class = "p-3 rounded col-header">Applied</div>
- 		<button type="button" class="col-buttons btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#myModal">+</button>
-    <div id="colCards1"></div>
+    <div id="Applied"></div>
  	</div>
 
  	<div class = "container-fluid col border border-top-0 border-light">
  		<div class = "p-3 rounded col-header">Interview</div>
- 		<button type="button" class="col-buttons btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#myModal">+</button>
-    <div id="colCards2"></div>
+    <div id="Interview"></div>
  	</div>
 
  	<div class = "container-fluid col border border-top-0 border-light">
  		<div class = "p-3 rounded col-header">Decision</div>
- 		<button type="button" class="col-buttons btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#myModal">+</button>
-    <div id="colCards3">
+    <div id="Decision">
  	</div>
 
  	<div class="modal" id="myModal">
@@ -71,28 +68,43 @@
  				<div class="modal-header">
  					<h4 class="modal-title">Company Portfolio</h4>
           <div class="dropdown">
-            <button type="button" class="btn btn-sm btn-outline-info btn-primary dropdown-toggle" data-toggle="dropdown">Move To</button>
+            <button id="MoveTo" type="button" class="btn btn-sm btn-outline-info btn-primary dropdown-toggle" data-toggle="dropdown">Move To (Pursuing)</button>
             <div class="dropdown-menu">
-              <button type = "button" onclick="setColCardPos('colCards')" class="btn dropdown-item">Pursuing</a>
-              <button type = "button" onclick="setColCardPos('colCards1')" class="btn dropdown-item">Applied</a>
-              <button type = "button" onclick="setColCardPos('colCards2')" class="btn dropdown-item">Interview</a>
-              <button type = "button" onclick="setColCardPos('colCards3')" class="btn dropdown-item">Decision</a>
+              <button type = "button" onclick="setColCardPos('Pursuing')" class="btn dropdown-item">Pursuing</a>
+              <button type = "button" onclick="setColCardPos('Applied')" class="btn dropdown-item">Applied</a>
+              <button type = "button" onclick="setColCardPos('Interview')" class="btn dropdown-item">Interview</a>
+              <button type = "button" onclick="setColCardPos('Decision')" class="btn dropdown-item">Decision</a>
             </div>
           </div>
  					<button type="button" class="close" data-dismiss="modal">&times;</button>
  				</div>
  				<div class="modal-body">
-
-          <div class = "col">Company Name
-            <input id = "CompanyName" type = "text" name = "Company-Name" value = "" placeholder=" Enter Company's Name">
+          <div class = "col">
+            <div>Company Name
+              <input id = "CompanyName" type = "text" name = "Company-Name" value = "" placeholder=" Enter Company's Name">
+            </div>
+            <br>
+            <div>Position Title
+              <input id = "PositionTitle" type = "text" name = "Position-Title" value = "" placeholder=" Enter Position's Title">
+            </div>
+            <br>
+            <div>URL
+              <input id = "URL" type = "url" name = "URL-Position" value = "" placeholder=" Enter Position's URL ">
+            </div>
+            <br>
+            <div>Notes</div>
+            <textarea cols="50" id = "Notes" type = "text" name = "Notes-Portfolio" value = "" placeholder=" Enter Any Notes "></textarea> 
+            <br>
           </div>
 
-          <div class = "col">Position Title
-            <input id = "PositionTitle" type = "text" name = "Position-Title" value = "" placeholder=" Enter Position's Title">
+          <div class = "col">
           </div>
+
+
 
         </div>
  				<div class="modal-footer">
+          <button id="colorButton" class="btn btn-outline-dark">Color</button>
  					<button type="button" onclick = "createColCards()" class="btn btn-danger" data-dismiss="modal">Add</button>
  				</div>
  			</div>

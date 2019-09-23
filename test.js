@@ -1,4 +1,4 @@
-var colCardPos = "colCards";
+var colCardPos = "Pursuing";
 
 function createColCards()
 {
@@ -10,7 +10,7 @@ function createColCards()
 	cardBody.classList.add("card-body");
 	cardBody.classList.add("text-center");
 
-	var cardHeader = document.createElement("div");
+	var cardHeader = document.createElement("button");
 	cardHeader.classList.add("card");
 	cardHeader.classList.add("bg-primary");
 
@@ -25,10 +25,13 @@ function createColCards()
 	document.getElementById(colCardPos).appendChild(card);
 
 	document.getElementById("CompanyName").value = "";
+	document.getElementById('PositionTitle').value = "";
 }
 
 
 function setColCardPos(s)
 {
 	colCardPos = s;
+	moveTo = document.getElementById("MoveTo");
+	moveTo.innerHTML = s;
 }

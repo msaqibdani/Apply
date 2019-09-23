@@ -7,16 +7,22 @@ body
 
 }
 
-input::placeholder {
+input::placeholder, textarea:placeholder {
   color: grey;
   opacity: 1;
   font-size: 12px;
 }
 
 
+
 #colCards
 {
 	margin-top: 2vh;
+}
+
+#AddPortfolio
+{
+	margin-left: 42.5vw;
 }
 
 .dropdown
@@ -26,28 +32,43 @@ input::placeholder {
 
 .colCard
 {
+	margin-left: 1.5vw;
 	margin-top: 1vh;
 }
 
+
 .card-text
 {
+	min-width: 15vw;
+	max-width: 15vw;
 	color:white;
+	text-align: center;
 }
 
 .row1
 {
-	height: 5vh;
+	height: 7vh;
 	background-color: white;
 }
 .row2
 {
-	margin-left: 32vw;
-	height: 5vh;
+	margin-top: 1vh;
+	height: 8vh;
 	background-color: white;
 }
 .row3
 {
-	height: 88vh;
+	height: 84vh;
+}
+
+.modal-title
+{
+	font-size: 18px;
+}
+
+.modal-body
+{
+	font-size: 13px;
 }
 
 
@@ -58,13 +79,5 @@ input::placeholder {
 	margin-top: 2vh;
 	text-align: center;
 	font-weight: bold;
-	background-color: black;
-}
-
-
-.col-buttons
-{
-	position: relative;
-	margin-left: 10.5vw;
-	margin-top: 1vh;
+	background-color: #003366;
 }
