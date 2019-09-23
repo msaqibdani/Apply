@@ -1,5 +1,4 @@
 var colCardPos = "Pursuing";
-var bootstap = require('bootstrap');
 /*const sqlite3 = require('sqlite3').verbose();
 
 
