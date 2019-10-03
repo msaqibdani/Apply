@@ -13,11 +13,26 @@ input::placeholder, textarea:placeholder {
   font-size: 12px;
 }
 
-
-
-#colCards
+#colorPicker
 {
-	margin-top: 2vh;
+	max-width: 12vw;
+	border-color: red;
+	font-size: 12px;
+
+}
+
+
+
+.colCard
+{
+	margin-top: 2vh !important;
+	margin-left: 1vw;
+	text-align: center;
+	color: white;
+	min-width: 20vw;
+	min-height: 10vh;
+	max-width: 20vw;
+	max-height: 10vh; 
 }
 
 #AddPortfolio
@@ -30,20 +45,6 @@ input::placeholder, textarea:placeholder {
 	margin-left: 11vw;
 }
 
-.colCard
-{
-	margin-left: 1.5vw;
-	margin-top: 1vh;
-}
-
-
-.card-text
-{
-	min-width: 15vw;
-	max-width: 15vw;
-	color:white;
-	text-align: center;
-}
 
 .row1
 {
