@@ -22,7 +22,7 @@ $(function ()
 
 function createDataBaseonLoad()
 {
-	db.run('CREATE TABLE IF NOT EXISTS Portfolios(CompanyName TEXT PRIMARY KEY, PositionTitle TEXT, Url TEXT, Notes TEXT, ColCardPosition TEXT, Color TEXT)');
+	db.run('CREATE TABLE IF NOT EXISTS Portfolios(CompanyName TEXT PRIMARY KEY, PositionTitle TEXT, Url TEXT, Notes TEXT, ColCardPosition TEXT, Color TEXT, Date DATE)');
 	developOnLoad();
 }
 
@@ -62,16 +62,17 @@ function createColCardsOnLoad(CompanyName, colCardPosition, Color)
 	button.style.borderColor = Color;
 }
 
-function updateDataBase(pCompanyName, pPositionTitle, pUrl, pNotes, pColCardPosition)
+function updateDataBase(pCompanyName, pPositionTitle, pUrl, pNotes, pColCardPosition, pDate)
 {
-	db.run('INSERT INTO Portfolios (CompanyName, PositionTitle, Url, Notes, ColCardPosition, Color) VALUES ($CompanyName, $PositionTitle, $Url, $Notes, $ColCardPosition, $Color)',
+	db.run('INSERT INTO Portfolios (CompanyName, PositionTitle, Url, Notes, ColCardPosition, Color, Date) VALUES ($CompanyName, $PositionTitle, $Url, $Notes, $ColCardPosition, $Color, $Date)',
 	{
 		$CompanyName: pCompanyName,
 		$PositionTitle: pPositionTitle,
 		$Url: pUrl,
 		$Notes: pNotes,
 		$ColCardPosition: pColCardPosition,
-		$Color: colCardColor
+		$Color: colCardColor,
+		$Date: pDate
 	});	
 }
 
@@ -92,11 +93,12 @@ function createColCards()
 	button.style.borderColor = colCardColor;
 
 	cN = document.getElementById("CompanyName").value;
-	pT = document.getElementById('PositionTitle').value;
-	uR = document.getElementById('URL').value;
-	nT = document.getElementById('Notes').value;
+	pT = document.getElementById("PositionTitle").value;
+	uR = document.getElementById("URL").value;
+	nT = document.getElementById("Notes").value;
+	intD = document.getElementById("interviewDate").value;
 	
-	updateDataBase(cN, pT, uR, nT, colCardPos);
+	updateDataBase(cN, pT, uR, nT, colCardPos, intD);
 
 	document.getElementById("CompanyName").value = "";
 	document.getElementById('PositionTitle').value = "";
