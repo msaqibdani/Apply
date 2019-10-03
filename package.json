@@ -14,12 +14,14 @@
   ],
   "author": "Daniyal Saqib",
   "devDependencies": {
-    "electron": "^6.0.10"
+    "electron": "^6.0.10",
+    "electron-rebuild": "^1.8.6"
   },
   "dependencies": {
     "asar": "^2.0.1",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "sqlite3": "^4.1.0"
   }
 }
