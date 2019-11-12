@@ -1,6 +1,7 @@
 var colCardPos = "Pursuing";
 var sqlite3 = require('sqlite3').verbose();
 var colCardColor;
+var retreiveInfoCompany; 
 let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.log(err.message);
@@ -13,17 +14,25 @@ let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) =
 
 $(function () 
 {
-	$('#colorPicker').colorpicker();
+	try{
+		$('#colorPicker').colorpicker();
 
-	$('#colorPicker').on('colorpickerChange', function(event) {
-		colCardColor = event.color.toString();
-	});
+		$('#colorPicker').on('colorpickerChange', function(event) {
+			colCardColor = event.color.toString();
+		});
+	}
+	catch (err)
+	{
+		console.log(err);
+	}
 });
+
 
 function createDataBaseonLoad()
 {
 	db.run('CREATE TABLE IF NOT EXISTS Portfolios(CompanyName TEXT PRIMARY KEY, PositionTitle TEXT, Url TEXT, Notes TEXT, ColCardPosition TEXT, Color TEXT, Date DATE)');
 	developOnLoad();
+
 }
 
 function developOnLoad()
@@ -49,14 +58,23 @@ function createColCardsOnLoad(CompanyName, colCardPosition, Color)
 	var card = document.createElement("div");
 
 	var button = document.createElement("button");
+	
+
 	button.innerHTML = CompanyName;
+	button.classList.add("companyButton");
 	button.classList.add("colCard");
 	button.classList.add("btn");
 	button.classList.add("btn-primary");
 	card.appendChild(button);
 
+	button.onclick = function ()
+	{
+		retreiveInfoCompany = button.innerHTML;
+		retreiveData();
+	};
 
-	document.getElementById(colCardPosition).appendChild(card);
+	try{document.getElementById(colCardPosition).appendChild(card);}
+	catch (err) {console.log(err);}
 
 	button.style.backgroundColor = Color;
 	button.style.borderColor = Color;
@@ -83,6 +101,7 @@ function createColCards()
 
 	var button = document.createElement("button");
 	button.innerHTML = document.getElementById("CompanyName").value;
+	button.classList.add("companyButton");
 	button.classList.add("colCard");
 	button.classList.add("btn");
 	button.classList.add("btn-primary");
@@ -91,6 +110,12 @@ function createColCards()
 	document.getElementById(colCardPos).appendChild(card);
 	button.style.backgroundColor = colCardColor;
 	button.style.borderColor = colCardColor;
+
+	button.onclick = function ()
+	{
+		retreiveInfoCompany = button.innerHTML;
+		retreiveData();
+	};
 
 	cN = document.getElementById("CompanyName").value;
 	pT = document.getElementById("PositionTitle").value;
@@ -113,7 +138,28 @@ function setColCardPos(s)
 	moveTo.innerHTML = s;
 }
 
-createDataBaseonLoad()
+createDataBaseonLoad();
+
+
+
+function retreiveData() {
+
+	var myWindow = window.open("./companyPortfolio.html");
+	myWindow.name = 'dani';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
