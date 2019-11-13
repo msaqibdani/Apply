@@ -3,6 +3,12 @@ var sqlite3 = require('sqlite3').verbose();
 var colCardColor;
 var retreiveInfoCompany; 
 var removeCurrCompany;
+var showName; 
+var showTitle;
+var showURL;
+var showNotes;
+var showDate;
+var showColor;
 
 let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
@@ -14,13 +20,6 @@ let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) =
   }  
 });
 var Chart = require('./node_modules/chart.js');
-
-var showName; 
-var showTitle;
-var showURL;
-var showNotes;
-var showDate;
-
 
 var stats = {'Total':0, 'Pursuing':0, 'Applied':0, 'Interview':0, 'Decision':0};
 
@@ -199,14 +198,22 @@ function showPortal()
 function showCompanyPortfolio()
 {
 	document.getElementById('showCompanyName').innerHTML = showName;
-	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = showColor;
-	document.getElementById('showCompanyPortfolioHeader').style.color = 'white';
-	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = showColor;
-	
 	document.getElementById('showCompanyTitle').innerHTML = showTitle;
 	document.getElementById('showCompanyURL').innerHTML = showURL;
 	document.getElementById('showCompanyNotes').innerHTML = showNotes;
 	document.getElementById('showCompanyInterviewDate').innerHTML = showDate;
+	changeColors(showColor);
+}
+
+function changeColors(x)
+{	
+	if (x == null)
+	{
+		return;
+	}
+	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = showColor;
+	document.getElementById('showCompanyPortfolioHeader').style.color = 'white';
+	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = showColor;
 }
 
 function resetModal()
@@ -226,18 +233,73 @@ function removeCompany()
 {
 	document.getElementById(removeCurrCompany).remove();
 
+		db.get('SELECT * FROM Portfolios WHERE CompanyName =? ', removeCurrCompany, (err, row) => {
+			stats[row.ColCardPosition] -= 1;
+			stats['Total'] -= 1;
+		})
+
 		db.run('DELETE FROM Portfolios WHERE CompanyName = ?',removeCurrCompany, function(err)
 		{
 			if (err) {
 				console.log(err);
 			}
+
+		
 		});
 }
 
 
-
-function createChart()
+function createLineChart()
 {
+
+	var arr = [stats['Pursuing'], stats['Applied'], stats['Interview'], stats['Decision'], 0]
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+
+		type: 'line',
+
+    
+	    data: {
+	    	labels: ['Pursuing', 'Applied', 'Interview', 'Decision'],
+	        datasets: [{
+	            backgroundColor: 'white',
+	            borderColor: 'red',
+	            data: arr,
+	            fill: false
+	        }]
+	    },
+
+	    options: {
+
+	    	legend: {
+	    		display: false
+	    	},
+	    	scales: {
+				yAxes: 
+				[{
+					stacked: false,
+					gridLines: 
+					{
+			        	display: false,
+			    	 }
+			    }],
+			    xAxes: 
+			    [{
+			      gridLines: {
+			        display: false
+			      }
+			    }]
+			}
+
+	    }
+	    
+	});
+}
+
+
+function createBarChart()
+{
+	var arr = [stats['Pursuing'], stats['Applied'], stats['Interview'], stats['Decision']]
 	var ctx = document.getElementById('myChart').getContext('2d');
 	var myChart = new Chart(ctx, {
 
@@ -249,14 +311,12 @@ function createChart()
 	        datasets: [{
 	            backgroundColor: ['#8775C2', '#4E90C1', '#DC726A', '#7CC05A'],
 	            borderColor: 'white',
-	            data: [1,20,13,4]
+	            data: arr
 	        }]
 	    }
 	    
 	});
-
 }
-
 
 
 
