@@ -86,13 +86,37 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <div class = "row row2">
-      <button class = "btn btn-outline-dark text-center col">Dashboard</button>
-      <button class = "btn btn-outline-dark text-center col">Statistics</button>
+      <button class = "btn btn-outline-dark text-center col" data-toggle="modal" data-target="#statistics">Statistics</button>
       <button class = "btn btn-outline-dark text-center col">ToDo</button>
     </div>
+
+    <div class="modal" id="statistics">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+         <div class="modal-header"><!-- Modal Header -->
+          <h4 class="modal-title">Statistics</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body"><!-- Modal body -->
+          <div class = "col row">
+            <canvas id="myChart" ></canvas>
+          </div>
+        </div>
+
+        <div class="modal-footer"><!-- Modal footer -->
+          <button onclick = "createChart()"type="button" class="btn btn-info">Show</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
     <div class = "row row3">
       <div class = "container-fluid col border border-top-0 border-light">

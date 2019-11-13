@@ -3,6 +3,7 @@ var sqlite3 = require('sqlite3').verbose();
 var colCardColor;
 var retreiveInfoCompany; 
 var removeCurrCompany;
+
 let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.log(err.message);
@@ -12,6 +13,7 @@ let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) =
   	console.log('Connected to the Portfolios database.');	
   }  
 });
+var Chart = require('./node_modules/chart.js');
 
 var showName; 
 var showTitle;
@@ -19,6 +21,8 @@ var showURL;
 var showNotes;
 var showDate;
 
+
+var stats = {'Total':0, 'Pursuing':0, 'Applied':0, 'Interview':0, 'Decision':0};
 
 $(function () 
 {
@@ -55,6 +59,8 @@ function developOnLoad()
 		{
 			if (row != null)
 			{
+				stats['Total'] += 1;
+				stats[row.ColCardPosition] += 1;
 				createColCardsOnLoad(row.CompanyName, row.ColCardPosition, row.Color);
 			}
 		}
@@ -120,6 +126,8 @@ function createColCards()
 	card.appendChild(button);
 
 	document.getElementById(colCardPos).appendChild(card);
+	stats['Total'] += 1;
+	stats[colCardPos] += 1;
 	button.style.backgroundColor = colCardColor;
 	button.style.borderColor = colCardColor;
 
@@ -177,7 +185,6 @@ function findCompany(x)
 					showNotes = row.Notes;
 					showDate = row.Date;
 					showColor = row.Color;
-					//console.log(showName);
 				}
 			}
 		});
@@ -193,11 +200,12 @@ function showCompanyPortfolio()
 {
 	document.getElementById('showCompanyName').innerHTML = showName;
 	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = showColor;
+	document.getElementById('showCompanyPortfolioHeader').style.color = 'white';
 	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = showColor;
 	
 	document.getElementById('showCompanyTitle').innerHTML = showTitle;
 	document.getElementById('showCompanyURL').innerHTML = showURL;
-	document.getElementById('showCompanyNotes').innerHTML = showURL;
+	document.getElementById('showCompanyNotes').innerHTML = showNotes;
 	document.getElementById('showCompanyInterviewDate').innerHTML = showDate;
 }
 
@@ -228,11 +236,26 @@ function removeCompany()
 
 
 
+function createChart()
+{
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
 
+		type: 'doughnut',
 
+    
+	    data: {
+	    	labels: ['Pursuing', 'Applied', 'Interview', 'Decision'],
+	        datasets: [{
+	            backgroundColor: ['#8775C2', '#4E90C1', '#DC726A', '#7CC05A'],
+	            borderColor: 'white',
+	            data: [1,20,13,4]
+	        }]
+	    }
+	    
+	});
 
-
-
+}
 
 
 
