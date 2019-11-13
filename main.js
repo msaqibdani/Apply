@@ -15,12 +15,14 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true
     }
-  })
 
+    
+  })
 
 
   // and load the index.html of the app.
   mainWindow.loadFile('./index.html')
+
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -32,6 +34,8 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+
 }
 
 

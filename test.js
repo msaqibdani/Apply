@@ -2,6 +2,7 @@ var colCardPos = "Pursuing";
 var sqlite3 = require('sqlite3').verbose();
 var colCardColor;
 var retreiveInfoCompany; 
+var removeCurrCompany;
 let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.log(err.message);
@@ -11,6 +12,13 @@ let db = new sqlite3.Database('./portfolios.db', sqlite3.OPEN_READWRITE, (err) =
   	console.log('Connected to the Portfolios database.');	
   }  
 });
+
+var showName; 
+var showTitle;
+var showURL;
+var showNotes;
+var showDate;
+
 
 $(function () 
 {
@@ -69,9 +77,13 @@ function createColCardsOnLoad(CompanyName, colCardPosition, Color)
 
 	button.onclick = function ()
 	{
-		retreiveInfoCompany = button.innerHTML;
-		retreiveData();
+		removeCurrCompany = button.innerHTML;
+		findCompany(button.innerHTML);
+		showPortal();
 	};
+
+	card.id = button.innerHTML;
+
 
 	try{document.getElementById(colCardPosition).appendChild(card);}
 	catch (err) {console.log(err);}
@@ -113,9 +125,14 @@ function createColCards()
 
 	button.onclick = function ()
 	{
-		retreiveInfoCompany = button.innerHTML;
-		retreiveData();
+		
+		removeCurrCompany = button.innerHTML;
+		findCompany(button.innerHTML);
+		showPortal();
+
 	};
+
+	card.id = button.innerHTML;
 
 	cN = document.getElementById("CompanyName").value;
 	pT = document.getElementById("PositionTitle").value;
@@ -141,15 +158,73 @@ function setColCardPos(s)
 createDataBaseonLoad();
 
 
-
-function retreiveData() {
-
-	var myWindow = window.open("./companyPortfolio.html");
-	myWindow.name = 'dani';
+function findCompany(x)
+{
+	db.each('SELECT * FROM Portfolios', (error, row) =>
+		{
+			console.log('in')
+			if (error)
+			{
+				throw error;
+			}
+			else
+			{
+				if (row != null && row.CompanyName == x)
+				{
+					showName = row.CompanyName;
+					showTitle = row.PositionTitle;
+					showURL = row.Url;
+					showNotes = row.Notes;
+					showDate = row.Date;
+					showColor = row.Color;
+					//console.log(showName);
+				}
+			}
+		});
 }
 
+function showPortal()
+{
 
+	$('#myModal1').modal('toggle');
+}
 
+function showCompanyPortfolio()
+{
+	document.getElementById('showCompanyName').innerHTML = showName;
+	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = showColor;
+	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = showColor;
+	
+	document.getElementById('showCompanyTitle').innerHTML = showTitle;
+	document.getElementById('showCompanyURL').innerHTML = showURL;
+	document.getElementById('showCompanyNotes').innerHTML = showURL;
+	document.getElementById('showCompanyInterviewDate').innerHTML = showDate;
+}
+
+function resetModal()
+{
+
+	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = 'white';
+	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = 'white';
+
+	document.getElementById('showCompanyName').innerHTML = 'Company Portal';
+	document.getElementById('showCompanyTitle').innerHTML = '';
+	document.getElementById('showCompanyURL').innerHTML = '';
+	document.getElementById('showCompanyNotes').innerHTML = '';
+	document.getElementById('showCompanyInterviewDate').innerHTML = '';
+}
+
+function removeCompany()
+{
+	document.getElementById(removeCurrCompany).remove();
+
+		db.run('DELETE FROM Portfolios WHERE CompanyName = ?',removeCurrCompany, function(err)
+		{
+			if (err) {
+				console.log(err);
+			}
+		});
+}
 
 
 
