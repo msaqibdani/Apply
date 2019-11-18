@@ -42,6 +42,7 @@ $(function ()
 function createDataBaseonLoad()
 {
 	db.run('CREATE TABLE IF NOT EXISTS Portfolios(CompanyName TEXT PRIMARY KEY, PositionTitle TEXT, Url TEXT, Notes TEXT, ColCardPosition TEXT, Color TEXT, Date DATE)');
+	db.run('CREATE TABLE IF NOT EXISTS ToDo(Item TEXT PRIMARY KEY)');
 	developOnLoad();
 
 }
@@ -56,7 +57,7 @@ function developOnLoad()
 		}
 		else
 		{
-			if (row != null)
+			if (row != null && row.CompanyName != '')
 			{
 				stats['Total'] += 1;
 				stats[row.ColCardPosition] += 1;
@@ -124,6 +125,11 @@ function createColCards()
 	button.classList.add("btn-primary");
 	card.appendChild(button);
 
+	if (button.innerHTML == "")
+	{
+		return;
+	}
+
 	document.getElementById(colCardPos).appendChild(card);
 	stats['Total'] += 1;
 	stats[colCardPos] += 1;
@@ -136,7 +142,6 @@ function createColCards()
 		removeCurrCompany = button.innerHTML;
 		findCompany(button.innerHTML);
 		showPortal();
-
 	};
 
 	card.id = button.innerHTML;
@@ -248,7 +253,6 @@ function removeCompany()
 		});
 }
 
-
 function createLineChart()
 {
 
@@ -296,7 +300,6 @@ function createLineChart()
 	});
 }
 
-
 function createBarChart()
 {
 	var arr = [stats['Pursuing'], stats['Applied'], stats['Interview'], stats['Decision']]
@@ -318,6 +321,74 @@ function createBarChart()
 	});
 }
 
+function addToDoItem()
+{	
+	var item = document.getElementById('ToDoInput').value;
+	console.log(item);
+
+	db.run('INSERT INTO ToDo (Item) VALUES ($Item)',
+	{
+		$Item: item
+	});	
+
+	document.getElementById('ToDoInput').value = '';
+
+}
+
+function showToDoList()
+{
+
+	db.each('SELECT * FROM ToDo', (error, row) =>
+		{
+			if (error)
+			{
+				throw error;
+			}
+			else
+			{
+				if (row != null && row.Item != '')
+				{
+					newElement(row.Item);
+				}
+			}
+		});
+}
+
+function newElement(text) 
+{
+	var li = document.createElement("li");
+	li.classList.add("unchecked");
+	li.onclick = function ()
+	{
+		li.classList.remove("unchecked");
+		li.classList.add("checked");
+		removeItemList(text);
+	}
+
+	li.innerHTML = text;
+	document.getElementById("ToDoBody").appendChild(li);
+	document.getElementById("myInput").value = "";	
+}
+
+function resetToDoList()
+{
+	node = document.getElementById("ToDoBody");
+	while (node.firstChild) 
+	{
+		node.removeChild(node.firstChild);
+	}
+}
+
+function removeItemList(text)
+{
+	db.run('DELETE FROM ToDo WHERE Item = ?',text, function(err)
+		{
+			if (err) {
+				console.log(err);
+			}
+
+		});
+}
 
 
 

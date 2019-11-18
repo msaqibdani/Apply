@@ -1,26 +1,65 @@
 body
 {
-    font-family: Roboto, "Helvetica Neue", sans-serif, Arial;
+    font-family: "Myriad", "Lucida Grande";
     padding: 1vh;
+    color:#002345 ;
 
 }
 
-input::placeholder, textarea:placeholder {
+input::placeholder {
   color: grey;
   opacity: 1;
-  font-size: 12px;
+  font-size: 11px;
 }
 
+textarea:placeholder
+{
+	color: grey;
+	opacity: 1;	
+	font-size: 11px;
+}
+
+textarea
+{
+	font-size: 11px;
+	float: right;
+}
+
+input
+{
+	float: right;
+}
+
+#ToDoModalBody
+{
+	background-color: #F1F0FF;
+}
 
 #colorPicker
 {
 	max-width: 12vw;
-	border-color: red;
+	border-color: #004991;
+	color: #002345;
 	font-size: 12px;
-
 }
 
+#AddPortfolio
+{
+	margin-left: 42.5vw;
+}
 
+.footerButtons
+{
+	border-color: #003366;
+	color: #003366;
+}
+
+.footerButtons:hover
+{
+	background-color: #C3C3E5;
+	color: white;
+	border-color:#C3C3E5; 
+}
 
 .colCard
 {
@@ -34,16 +73,25 @@ input::placeholder, textarea:placeholder {
 	max-height: 10vh; 
 }
 
-#AddPortfolio
+
+.customButtons
 {
-	margin-left: 42.5vw;
+	border-color: #003366;
+	color: #003366;	
 }
+
+.customButtons:hover
+{
+	background-color: #8C489F;
+	color: white;
+	border-color:#004991; 
+}
+
 
 .dropdown
 {
 	margin-left: 11vw;
 }
-
 
 .row1
 {
@@ -56,6 +104,7 @@ input::placeholder, textarea:placeholder {
 	height: 8vh;
 	background-color: white;
 }
+
 .row3
 {
 	height: 84vh;
@@ -71,7 +120,6 @@ input::placeholder, textarea:placeholder {
 	font-size: 13px;
 }
 
-
 .col-header
 {
 	color: white;
@@ -81,3 +129,29 @@ input::placeholder, textarea:placeholder {
 	font-weight: bold;
 	background-color: #003366;
 }
+
+.checked 
+{
+	font-size: 15px;
+	color:#C3C3E5;
+	text-decoration: line-through;
+}
+
+.unchecked
+{
+	font-size: 15px;
+	color:#443266;
+}
+
+
+/* Color Codes: 
+#002345 VeryDark (font color)
+#003366 Dark Blue
+#004991 Light Blue
+
+
+#443266 Dark Purple
+#C3C3E5 Light Purple
+#F1F0FF Very Very Light 
+#8C489F Purple
+*/

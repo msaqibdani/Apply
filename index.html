@@ -27,7 +27,7 @@
     </div>
 
     <div class = "row row1">
-      <button id="AddPortfolio" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Add Company Portfolio</button>
+      <button id="AddPortfolio" type="button" class="btn customButtons btn-outline-light" data-toggle="modal" data-target="#myModal">Add Company Portfolio</button>
 
       <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -37,7 +37,7 @@
 
               <div class="dropdown">
 
-                <button id="MoveTo" type="button" class="btn btn-sm btn-outline-info btn-primary dropdown-toggle" data-toggle="dropdown">Move To</button>
+                <button id="MoveTo" type="button" class="btn btn-sm btn-outline-light customButtons dropdown-toggle" data-toggle="dropdown">Move To</button>
 
                 <div class="dropdown-menu">
                   <button type = "button" onclick="setColCardPos('Pursuing')" class="btn dropdown-item">Pursuing</button>
@@ -54,33 +54,38 @@
 
             <div class="modal-body">
               <div class = "col">
-                <div style="font-size: 15px; font-weight: bold">Company Name
+                <div style="font-size: 14px; font-weight: bold">Company Name
                   <input id = "CompanyName" type = "text" name = "Company-Name" value = "" placeholder=" Enter Company's Name">
                 </div>
                 <br>
-                <div style="font-size: 15px; font-weight: bold">Position Title
+                <div style="font-size: 14px; font-weight: bold">Position Title
                   <input id = "PositionTitle" type = "text" name = "Position-Title" value = "" placeholder=" Enter Position's Title">
                 </div>
                 <br>
-                <div style="font-size: 15px; font-weight: bold">URL
+                <div style="font-size: 14px; font-weight: bold">URL
                   <input id = "URL" type = "url" name = "URL-Position" value = "" placeholder=" Enter Position's URL ">
                 </div>
                 <br>
-                <div style="font-size: 15px; font-weight: bold">Interview Date
-                  <input type="date" id="interviewDate">
+                <div style="font-size: 14px; font-weight: bold">Interview Date
+                  <input type="date" id="interviewDate" style="font-size:11px;">
                 </div>
                 <br>
-                <div style="font-size: 15px; font-weight: bold">Notes</div>
-                <textarea cols="50" id = "Notes" type = "text" name = "Notes-Portfolio" value = "" placeholder=" Enter Any Notes "></textarea> 
+                <div style="font-size: 14px; font-weight: bold;">Notes
+                <textarea cols="24" id = "Notes" type = "text" name = "Notes-Portfolio" value = "" placeholder=" Enter Any Notes"></textarea> 
+                </div>
                 <br>
+                <br>
+                <div id="myDIV" class="header" style="font-size: 14px; font-weight: bold">To Do List
+                  <input type="text" id="ToDoInput" placeholder="Item...">
+                </div>
               </div>
-              <div class = "col"></div>
             </div>
 
             <div class="modal-footer">
-              <div>Select Color</div> 
+              <div style="font-size:14px;">Select Color</div> 
               <input id="colorPicker" type="text" class="form-control" value="rgb(255, 128, 0)"/>
-              <button type="button" onclick = "createColCards()" class="btn btn-danger" data-dismiss="modal">Add</button>
+              <button type="button" onclick = "createColCards()" class="btn btn-sm footerButtons btn-outline-light" data-dismiss="modal">Company Add</button>
+              <button onclick = "addToDoItem()" class="btn btn-sm footerButtons btn-outline-light">Item Add</button>
             </div>
 
           </div>
@@ -89,8 +94,31 @@
     </div>
 
     <div class = "row row2">
-      <button class = "btn btn-outline-dark text-center col" data-toggle="modal" data-target="#statistics">Statistics</button>
-      <button class = "btn btn-outline-dark text-center col">ToDo</button>
+      <button class = "btn customButtons btn-outline-light text-center col" data-toggle="modal" data-target="#statistics">Statistics</button>
+      <button class = "btn customButtons btn-outline-light text-center col" data-toggle="modal" data-target="#ToDoModal">ToDo</button>
+
+
+      <div class="modal" id="ToDoModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">To Do</h4>
+              <button onclick="resetToDoList()" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div id="ToDoModalBody"class="modal-body">
+              <ul id="ToDoBody"></ul>
+            </div>
+
+            <div class="modal-footer">
+              <button onclick="resetToDoList()" type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+              <button onclick = "showToDoList()" type="button" class="btn btn-light">Show</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="modal" id="statistics">
@@ -111,7 +139,7 @@
           <div class="modal-footer">
             <button onclick = "createLineChart()"type="button" class="btn btn-info">Line Chart</button>
             <button onclick = "createBarChart()"type="button" class="btn btn-info">Bar Chart </button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
           </div>
 
         </div>
@@ -182,9 +210,9 @@
           </div>
 
           <div id='showCompanyPortfolioFooter'class="modal-footer"><!-- Modal footer -->
-            <button id='showCompanyPortfolioButton'class="btn btn-outline-info" onclick="showCompanyPortfolio()">Show</button>
-            <button id='remove'class="btn btn-outline-warning" onclick="removeCompany()">Remove</button>
-            <button type="button" onclick = "resetModal()"class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button id='showCompanyPortfolioButton'class="btn footerButtons btn-outline-light" onclick="showCompanyPortfolio()">Show</button>
+            <button id='remove'class="btn footerButtons btn-outline-light" onclick="removeCompany()">Remove</button>
+            <button type="button" onclick = "resetModal()"class="btn btn-outline-light footerButtons" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
