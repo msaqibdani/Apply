@@ -39,6 +39,8 @@ $(function ()
 });
 
 
+/* Creates a table if it doesn't exists and runs developOnLoad()
+*/
 function createDataBaseonLoad()
 {
 	db.run('CREATE TABLE IF NOT EXISTS Portfolios(CompanyName TEXT PRIMARY KEY, PositionTitle TEXT, Url TEXT, Notes TEXT, ColCardPosition TEXT, Color TEXT, Date DATE)');
@@ -47,6 +49,8 @@ function createDataBaseonLoad()
 
 }
 
+/*	Runs through database and calls for createColCardsonLoad()
+*/
 function developOnLoad()
 {
 	db.each('SELECT * FROM Portfolios', (error, row) =>
@@ -67,6 +71,7 @@ function developOnLoad()
 	});
 }
 
+/*	It is called on load for each element in database to develop the company Card */
 function createColCardsOnLoad(CompanyName, colCardPosition, Color)
 {
 	var card = document.createElement("div");
@@ -98,6 +103,8 @@ function createColCardsOnLoad(CompanyName, colCardPosition, Color)
 	button.style.borderColor = Color;
 }
 
+/*	It is called by createColCards and to add company information to database
+*/
 function updateDataBase(pCompanyName, pPositionTitle, pUrl, pNotes, pColCardPosition, pDate)
 {
 	db.run('INSERT INTO Portfolios (CompanyName, PositionTitle, Url, Notes, ColCardPosition, Color, Date) VALUES ($CompanyName, $PositionTitle, $Url, $Notes, $ColCardPosition, $Color, $Date)',
@@ -112,6 +119,8 @@ function updateDataBase(pCompanyName, pPositionTitle, pUrl, pNotes, pColCardPosi
 	});	
 }
 
+/*	Create company cards in the coloumns and calls updateDataBase
+*/
 function createColCards()
 {
 	
@@ -160,6 +169,9 @@ function createColCards()
 	document.getElementById('Notes').value = "";
 }
 
+/*	Sets current Company position while making company card 
+	for the first time
+*/
 function setColCardPos(s)
 {
 	colCardPos = s;
@@ -167,9 +179,12 @@ function setColCardPos(s)
 	moveTo.innerHTML = s;
 }
 
-createDataBaseonLoad();
+createDataBaseonLoad(); //If there's anything in the database develop those cards
 
 
+/*	Updates the variables whenever a company card is clicked
+	It is called during onclick event while creating company cards
+*/
 function findCompany(x)
 {
 	db.each('SELECT * FROM Portfolios', (error, row) =>
@@ -200,6 +215,8 @@ function showPortal()
 	$('#myModal1').modal('toggle');
 }
 
+/* Shows companyPortfolio and calls changeColors
+*/
 function showCompanyPortfolio()
 {
 	document.getElementById('showCompanyName').innerHTML = showName;
@@ -210,8 +227,15 @@ function showCompanyPortfolio()
 	changeColors(showColor);
 }
 
+/* 	When a company is moved from one coloumn to another
+	this function updates databases and the coloumns
+*/
 function moveToNew(place)
 {
+	db.get('SELECT * FROM Portfolios WHERE CompanyName =?', removeCurrCompany, (err, row) => {
+		stats[row.ColCardPosition]-=1;
+	});
+
 	db.run('UPDATE Portfolios SET ColCardPosition = ? WHERE CompanyName = ?',[place, removeCurrCompany], function(err)
 		{
 			if (err) {
@@ -222,9 +246,14 @@ function moveToNew(place)
 	document.getElementById(removeCurrCompany).remove();
 
 	db.get('SELECT * FROM Portfolios WHERE CompanyName =?', removeCurrCompany, (err, row) => {
+		stats[row.ColCardPosition]+=1;
 		createColCardsOnLoad(row.CompanyName, row.ColCardPosition, row.Color)
 		});
 }
+
+/*	Changes the color of the showCompanyPortfolio Modal
+	when company is shown
+*/
 
 function changeColors(x)
 {	
@@ -250,6 +279,10 @@ function changeColors(x)
 	document.getElementById('cardInterviewDate').style.color = 'white';
 }
 
+/*	Resets the entire showCompanyPortfolio Modal
+	It is called by removeCompany as well as by the close button
+	of the Portfolio Modal
+*/
 function resetModal()
 {
 
@@ -280,6 +313,9 @@ function resetModal()
 	document.getElementById('showCompanyInterviewDate').innerHTML = '';
 }
 
+/*	Removes the company from the database
+	It is called by 
+*/
 function removeCompany()
 {
 	document.getElementById(removeCurrCompany).remove();
@@ -301,6 +337,7 @@ function removeCompany()
 	resetModal();
 }
 
+/*Createss Line Chart*/
 function createLineChart()
 {
 
@@ -348,6 +385,7 @@ function createLineChart()
 	});
 }
 
+/*Createss Bar Chart*/
 function createBarChart()
 {
 	var arr = [stats['Pursuing'], stats['Applied'], stats['Interview'], stats['Decision']]
@@ -369,6 +407,9 @@ function createBarChart()
 	});
 }
 
+/*	Updates the Database by adding new ToDo Item
+	It is used by Company Portfolio Modal
+*/
 function addToDoItem()
 {	
 	var item = document.getElementById('ToDoInput').value;
@@ -381,6 +422,9 @@ function addToDoItem()
 	document.getElementById('ToDoInput').value = '';
 }
 
+/*	Updates the Database by adding new ToDo Item
+	It is used by Add ToDo seperate funcion
+*/
 function addToDo()
 {	
 	var item = document.getElementById('ToDoInput1').value;
@@ -393,6 +437,10 @@ function addToDo()
 	document.getElementById('ToDoInput1').value = '';
 }
 
+/*	Called by Show Button in ToDoModal
+	Runs through each element in ToDo Database 
+	and calls newElement(row.Item)
+*/
 function showToDoList()
 {
 
@@ -412,6 +460,10 @@ function showToDoList()
 		});
 }
 
+/* Adds a new element to the list Item
+   It is called in showToDoList()
+   Called when users wants to see the list
+*/
 function newElement(text) 
 {
 	var li = document.createElement("li");
@@ -428,6 +480,9 @@ function newElement(text)
 	document.getElementById("myInput").value = "";	
 }
 
+/*	Resets the entire ToDoModal body (avoid over repeating)
+	It is called by Close Button in the ToDoModal footer
+*/
 function resetToDoList()
 {
 	node = document.getElementById("ToDoBody");
@@ -437,6 +492,9 @@ function resetToDoList()
 	}
 }
 
+/*	When a ToDo Item is clicked -> removeItemList is called which
+	removes the item from the database
+*/
 function removeItemList(text)
 {
 	db.run('DELETE FROM ToDo WHERE Item = ?',text, function(err)
