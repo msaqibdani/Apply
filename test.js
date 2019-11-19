@@ -210,6 +210,22 @@ function showCompanyPortfolio()
 	changeColors(showColor);
 }
 
+function moveToNew(place)
+{
+	db.run('UPDATE Portfolios SET ColCardPosition = ? WHERE CompanyName = ?',[place, removeCurrCompany], function(err)
+		{
+			if (err) {
+				console.log(err);
+			}
+		});
+
+	document.getElementById(removeCurrCompany).remove();
+
+	db.get('SELECT * FROM Portfolios WHERE CompanyName =?', removeCurrCompany, (err, row) => {
+		createColCardsOnLoad(row.CompanyName, row.ColCardPosition, row.Color)
+		});
+}
+
 function changeColors(x)
 {	
 	if (x == null)
@@ -232,7 +248,6 @@ function changeColors(x)
 
 	document.getElementById('cardInterviewDate').style.backgroundColor = showColor;
 	document.getElementById('cardInterviewDate').style.color = 'white';
-	
 }
 
 function resetModal()
