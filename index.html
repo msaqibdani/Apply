@@ -27,7 +27,13 @@
     </div>
 
     <div class = "row row1">
-      <button id="AddPortfolio" type="button" class="btn customButtons btn-outline-light" data-toggle="modal" data-target="#myModal">Add Company Portfolio</button>
+      <div class = "col">
+        <button id="AddPortfolio" type="button" class="col btn customButtons btn-outline-light" data-toggle="modal" data-target="#myModal">Add Company Portfolio</button>
+      </div>
+
+      <div class="col">
+        <button id="AddPortfolio" type="button" class="col btn customButtons btn-outline-light" data-toggle="modal" data-target="#myModalToDo">Add ToDo Item</button>
+      </div>
 
       <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -84,8 +90,33 @@
             <div class="modal-footer">
               <div style="font-size:14px;">Select Color</div> 
               <input id="colorPicker" type="text" class="form-control" value="rgb(255, 128, 0)"/>
-              <button type="button" onclick = "createColCards()" class="btn btn-sm footerButtons btn-outline-light" data-dismiss="modal">Company Add</button>
-              <button onclick = "addToDoItem()" class="btn btn-sm footerButtons btn-outline-light">Item Add</button>
+              <button type="button" onclick = "createColCards()" class="btn btn-sm customButtons btn-outline-light" data-dismiss="modal">Company Add</button>
+              <button onclick = "addToDoItem()" class="btn btn-sm customButtons btn-outline-light">Item Add</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="myModalToDo">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            
+            <div class="modal-header">
+              <h4 class="modal-title">Add to ToDo List</h4>
+            </div>
+
+            <div class="modal-body">
+              <div class = "col">
+                <div id="myDIV" class="header" style="font-size: 14px; font-weight: bold">To Do List
+                  <input type="text" id="ToDoInput1" placeholder="Item...">
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button onclick = "addToDo()" class="btn btn-sm customButtons btn-outline-light">Item Add</button>
+              <button class="btn btn-sm customButtons btn-outline-light" data-dismiss="modal">Close</button>
             </div>
 
           </div>
@@ -94,8 +125,12 @@
     </div>
 
     <div class = "row row2">
-      <button class = "btn customButtons btn-outline-light text-center col" data-toggle="modal" data-target="#statistics">Statistics</button>
-      <button class = "btn customButtons btn-outline-light text-center col" data-toggle="modal" data-target="#ToDoModal">ToDo</button>
+      <div class='col'>
+        <button class = "col btn customButtons btn-outline-light text-center " data-toggle="modal" data-target="#statistics">Statistics</button>
+      </div>
+      <div class = "col">
+        <button class = "col btn customButtons btn-outline-light text-center " data-toggle="modal" data-target="#ToDoModal">ToDo</button>
+      </div>
 
 
       <div class="modal" id="ToDoModal">
@@ -112,13 +147,12 @@
             </div>
 
             <div class="modal-footer">
-              <button onclick="resetToDoList()" type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-              <button onclick = "showToDoList()" type="button" class="btn btn-light">Show</button>
+              <button onclick="resetToDoList()" type="button" class="btn customButtons btn-light" data-dismiss="modal">Close</button>
+              <button onclick = "showToDoList()" type="button" class="btn customButtons btn-light">Show</button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="modal" id="statistics">
@@ -137,9 +171,9 @@
           </div>
 
           <div class="modal-footer">
-            <button onclick = "createLineChart()"type="button" class="btn btn-info">Line Chart</button>
-            <button onclick = "createBarChart()"type="button" class="btn btn-info">Bar Chart </button>
-            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button onclick = "createLineChart()"type="button" class="btn customButtons btn-light">Line Chart</button>
+            <button onclick = "createBarChart()"type="button" class="btn customButtons btn-light">Bar Chart </button>
+            <button type="button" class="btn customButtons btn-light" data-dismiss="modal">Close</button>
           </div>
 
         </div>
@@ -183,25 +217,25 @@
           <div id="showCompanyPortfolioBody" class="modal-body"><!-- Modal body -->
 
             <div id='showCompanyTitleBody' class="card">
-              <div class="card-body text-center" style="font-weight: bold; font-size: 15px;">Title
+              <div id="cardTitle" class="card-body text-center" style="font-weight: bold; font-size: 15px;">Title
                 <p id="showCompanyTitle" class="card-text"style="font-weight: lighter; font-size: 13px;"></p>
               </div>
             </div>
 
             <div class="card">
-              <div class="card-body text-center"style="font-weight: bold; font-size: 15px;">URL
+              <div id="cardURL" class="card-body text-center"style="font-weight: bold; font-size: 15px;">URL
                 <p id="showCompanyURL" class="card-text"style="font-weight: lighter; font-size: 13px;"></p>
               </div>
             </div>
 
             <div class="card">
-              <div class="card-body text-center"style="font-weight: bold; font-size: 15px;">Notes
+              <div id="cardNotes" class="card-body text-center"style="font-weight: bold; font-size: 15px;">Notes
                 <p id="showCompanyNotes" class="card-text"style="font-weight: lighter; font-size: 13px;"></p>
               </div>
             </div>
 
             <div class="card">
-              <div class="card-body text-center"style="font-weight: bold; font-size: 15px;">Interview Date
+              <div id="cardInterviewDate" class="card-body text-center"style="font-weight: bold; font-size: 15px;">Interview Date
                 <p id="showCompanyInterviewDate" class="card-text" style="font-weight: lighter; font-size: 13px;"></p>
               </div>
             </div>
@@ -210,9 +244,9 @@
           </div>
 
           <div id='showCompanyPortfolioFooter'class="modal-footer"><!-- Modal footer -->
-            <button id='showCompanyPortfolioButton'class="btn footerButtons btn-outline-light" onclick="showCompanyPortfolio()">Show</button>
-            <button id='remove'class="btn footerButtons btn-outline-light" onclick="removeCompany()">Remove</button>
-            <button type="button" onclick = "resetModal()"class="btn btn-outline-light footerButtons" data-dismiss="modal">Close</button>
+            <button id='showCompanyPortfolioButton'class="btn customButtons btn-outline-light" onclick="showCompanyPortfolio()">Show</button>
+            <button id='remove'class="btn customButtons btn-outline-light" data-dismiss="modal" onclick="removeCompany()">Remove</button>
+            <button id='closeModal' type="button" onclick = "resetModal()"class="btn btn-outline-light customButtons" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

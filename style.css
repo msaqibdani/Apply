@@ -43,23 +43,12 @@ input
 	font-size: 12px;
 }
 
+/*
 #AddPortfolio
 {
 	margin-left: 42.5vw;
-}
+}*/
 
-.footerButtons
-{
-	border-color: #003366;
-	color: #003366;
-}
-
-.footerButtons:hover
-{
-	background-color: #C3C3E5;
-	color: white;
-	border-color:#C3C3E5; 
-}
 
 .colCard
 {
@@ -76,7 +65,7 @@ input
 
 .customButtons
 {
-	border-color: #003366;
+	border-color: #002345;
 	color: #003366;	
 }
 
@@ -93,15 +82,10 @@ input
 	margin-left: 11vw;
 }
 
-.row1
-{
-	height: 7vh;
-	background-color: white;
-}
+
 .row2
 {
 	margin-top: 1vh;
-	height: 8vh;
 	background-color: white;
 }
 

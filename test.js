@@ -218,14 +218,45 @@ function changeColors(x)
 	}
 	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = showColor;
 	document.getElementById('showCompanyPortfolioHeader').style.color = 'white';
+
 	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = showColor;
+
+	document.getElementById('cardTitle').style.backgroundColor = showColor;
+	document.getElementById('cardTitle').style.color = 'white';
+
+	document.getElementById('cardURL').style.backgroundColor = showColor;
+	document.getElementById('cardURL').style.color = 'white';
+
+	document.getElementById('cardNotes').style.backgroundColor = showColor;
+	document.getElementById('cardNotes').style.color = 'white';
+
+	document.getElementById('cardInterviewDate').style.backgroundColor = showColor;
+	document.getElementById('cardInterviewDate').style.color = 'white';
+	
 }
 
 function resetModal()
 {
 
 	document.getElementById('showCompanyPortfolioHeader').style.backgroundColor = 'white';
+	document.getElementById('showCompanyPortfolioHeader').style.color = '';
+
 	document.getElementById('showCompanyPortfolioBody').style.backgroundColor = 'white';
+
+	document.getElementById('showCompanyPortfolioFooter').style.backgroundColor = 'white';
+
+	document.getElementById('cardTitle').style.backgroundColor = 'white';
+	document.getElementById('cardTitle').style.color = '';
+
+	document.getElementById('cardURL').style.backgroundColor = 'white';
+	document.getElementById('cardURL').style.color = '';
+
+	document.getElementById('cardNotes').style.backgroundColor = 'white';
+	document.getElementById('cardNotes').style.color = '';
+
+	document.getElementById('cardInterviewDate').style.backgroundColor = 'white';
+	document.getElementById('cardInterviewDate').style.color = '';
+	
 
 	document.getElementById('showCompanyName').innerHTML = 'Company Portal';
 	document.getElementById('showCompanyTitle').innerHTML = '';
@@ -251,6 +282,8 @@ function removeCompany()
 
 		
 		});
+
+	resetModal();
 }
 
 function createLineChart()
@@ -324,7 +357,6 @@ function createBarChart()
 function addToDoItem()
 {	
 	var item = document.getElementById('ToDoInput').value;
-	console.log(item);
 
 	db.run('INSERT INTO ToDo (Item) VALUES ($Item)',
 	{
@@ -332,7 +364,18 @@ function addToDoItem()
 	});	
 
 	document.getElementById('ToDoInput').value = '';
+}
 
+function addToDo()
+{	
+	var item = document.getElementById('ToDoInput1').value;
+
+	db.run('INSERT INTO ToDo (Item) VALUES ($Item)',
+	{
+		$Item: item
+	});	
+
+	document.getElementById('ToDoInput1').value = '';
 }
 
 function showToDoList()
