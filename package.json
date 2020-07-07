@@ -14,7 +14,7 @@
   ],
   "author": "Daniyal Saqib",
   "devDependencies": {
-    "electron": "^6.0.10",
+    "electron": "^9.1.0",
     "electron-rebuild": "^1.8.6"
   },
   "dependencies": {
